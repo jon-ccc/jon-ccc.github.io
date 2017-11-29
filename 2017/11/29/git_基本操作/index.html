@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Jon">
 <meta property="og:description" content="文档整体解决方案(readthedocs、github 、sphinx)使用 123456789101112131415mac 下git命令自动补全&amp;gt; http://blog.csdn.net/chenbifeng/article/details/51570606github搭建个人博客&amp;gt; http://blog.csdn.net/yuexianchang/article/detail">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T14:58:48.396Z">
+<meta property="og:updated_time" content="2017-11-29T14:59:49.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git_基本操作">
 <meta name="twitter:description" content="文档整体解决方案(readthedocs、github 、sphinx)使用 123456789101112131415mac 下git命令自动补全&amp;gt; http://blog.csdn.net/chenbifeng/article/details/51570606github搭建个人博客&amp;gt; http://blog.csdn.net/yuexianchang/article/detail">
@@ -375,7 +375,77 @@ git push
 </code></pre><p>关联github并上传本地的仓库</p>
 <pre><code>git remote add origin git@github.com:jon-ccc/Ayuan.git
 git push -u origin master
-</code></pre>
+</code></pre><h2 id="私服搭建git服务器"><a href="#私服搭建git服务器" class="headerlink" title="私服搭建git服务器"></a>私服搭建git服务器</h2><h3 id="git服务器搭建post-receive-钩子部署服务端代码"><a href="#git服务器搭建post-receive-钩子部署服务端代码" class="headerlink" title="git服务器搭建post-receive 钩子部署服务端代码"></a>git服务器搭建post-receive 钩子部署服务端代码</h3><h4 id="一、git服务器搭建-服务器用户：root"><a href="#一、git服务器搭建-服务器用户：root" class="headerlink" title="一、git服务器搭建(服务器用户：root)"></a>一、git服务器搭建(服务器用户：root)</h4><p>安装git</p>
+<pre><code>$ apt-get install git
+</code></pre><p>创建git用户</p>
+<pre><code>$ adduser git
+$ passwd git  //修改git用户密码
+</code></pre><p>创建git仓库</p>
+<pre><code>$ cd /home
+$ mkdir git
+$ mkdir ./git/.ssh
+$ touch./git/.ssh/authorized_keys
+$ cd /home/git
+$ git init --bare test.git    //初始化仓库
+$ chown -R git:git ../git
+</code></pre><h4 id="二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作"><a href="#二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作" class="headerlink" title="二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作"></a>二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作</h4><p>首先生成客户端密钥，且把公钥复制到authorized_keys文件里</p>
+<pre><code>$ ssh-keygen -t rsa -C “test@qq.com”   //生成密钥
+$ cat /userdir/.ssh/id_rsa.pub    //把显示的内容复制到服务端的authorized_keys文件里
+</code></pre><p>然后把git仓库拷贝下来</p>
+<pre><code>$ git clone ssh://git@123.456.78.9/home/git/test.git
+</code></pre><p>测试操作（git push完成后git自动对web目录做git pull操作）</p>
+<pre><code>$ cd test
+$ git pull origin master
+$ touch test.txt
+$ git add .
+$ git commit -m&apos;test&apos;
+$ git push origin master
+</code></pre><p>web服务器:</p>
+<p>使用git用户生成git密钥（把客户端的公钥（id_rsa.pb文件内容）添加到authorized_keys文件，git push操作就不需要每次都输入密码了</p>
+<pre><code>$ sudo -u git ssh-keygen -t rsa -C “test@qq.com”   //生成密钥
+$ cd /home/git/.ssh
+$ cat id_rsa.pub&gt;&gt;authorized_keys  //把公钥加入authorized_keys文件
+</code></pre><p>创建web目录</p>
+<pre><code>$ cd /home
+$ git clone ssh://git@127.0.0.1/home/git/test.git   //因为我的web服务器与git服务器是同一台
+</code></pre><p>主机所以使用127.0.0.1,如果不是放在同一台主机的请使用公网ip</p>
+<pre><code>$ chown -R git:git test    //test目录拥有设为git(如果test有其他的拥有者，可以把git加入其目录拥有者的组)
+</code></pre><blockquote>
+<ol>
+<li>编写自动更新钩子</li>
+</ol>
+</blockquote>
+<pre><code>$ cd /home/git/test.git/hooks/
+$ vim post-receive
+</code></pre><blockquote>
+<p>// /home/git/test.git/hooks/post-receive  文件路径</p>
+</blockquote>
+<pre><code>#!/bin/sh
+cd /home/test/
+unset GIT_DIR    //清空git的工作目录，git才可以进入/home/test/工作目录（没有使用该代码，报错:remote: fatal: Not a git repository: &apos;.&apos;)
+git config --list
+git pull origin master
+</code></pre><p>给钩子文件添加执行权限</p>
+<pre><code>$ cd /home/git/test.git/hooks/
+$ chmod +x post-recevie  //给钩子文件添加执行权限
+</code></pre><p>git 报错 密钥 公钥</p>
+<blockquote>
+<p>   参考:(<a href="https://help.github.com/articles/connecting-to-github-with-ssh/" target="_blank" rel="noopener">https://help.github.com/articles/connecting-to-github-with-ssh/</a>)</p>
+</blockquote>
+<pre><code>Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre><p>添加一个新的SSH密钥到你的GitHub帐户<br>生成一个ssh密钥<br>执行下面命令.替换您的GitHub电子邮件地址</p>
+<pre><code>cd ~/.ssh/
+ssh-keygen -t rsa -b 4096 -C &quot;xxx@gmail.com”
+</code></pre><p>下面3个,请按Enter键</p>
+<p>将您的SSH密钥添加到ssh-agent</p>
+<pre><code>eval &quot;$(ssh-agent -s)&quot;
+ssh-add -k ~/.ssh/id_rsa
+</code></pre><p>添加一个新的SSH密钥到你的GitHub帐户<br>将id_rsa.pub文件的内容复制到剪贴板 vim ~/.ssh/id_rsa.pub</p>
+
       
     </div>
     
@@ -539,7 +609,7 @@ git push -u origin master
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github初始设置"><span class="nav-text">github初始设置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github初始设置"><span class="nav-text">github初始设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私服搭建git服务器"><span class="nav-text">私服搭建git服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git服务器搭建post-receive-钩子部署服务端代码"><span class="nav-text">git服务器搭建post-receive 钩子部署服务端代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、git服务器搭建-服务器用户：root"><span class="nav-text">一、git服务器搭建(服务器用户：root)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作"><span class="nav-text">二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
