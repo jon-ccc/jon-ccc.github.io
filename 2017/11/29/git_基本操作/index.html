@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Jon">
 <meta property="og:description" content="git的基本命令与服务搭建…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T16:33:16.906Z">
+<meta property="og:updated_time" content="2017-11-29T16:38:22.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git_基本操作">
 <meta name="twitter:description" content="git的基本命令与服务搭建…">
@@ -419,8 +419,7 @@ $ touch test.txt
 $ git add .
 $ git commit -m&apos;test&apos;
 $ git push origin master
-</code></pre><p>web服务器:</p>
-<p>使用git用户生成git密钥(把客户端的公钥(id_rsa.pb文件内容）添加到authorized_keys文件，git push操作就不需要每次都输入密码了</p>
+</code></pre><h4 id="web服务器设置"><a href="#web服务器设置" class="headerlink" title="web服务器设置:"></a>web服务器设置:</h4><p>使用git用户生成git密钥(把客户端的公钥(id_rsa.pb文件内容）添加到authorized_keys文件，git push操作就不需要每次都输入密码了</p>
 <pre><code>$ sudo -u git ssh-keygen -t rsa -C “test@qq.com”   //生成密钥
 $ cd /home/git/.ssh
 $ cat id_rsa.pub&gt;&gt;authorized_keys  //把公钥加入authorized_keys文件
@@ -429,11 +428,7 @@ $ cat id_rsa.pub&gt;&gt;authorized_keys  //把公钥加入authorized_keys文件
 $ git clone ssh://git@127.0.0.1/home/git/test.git   //因为我的web服务器与git服务器是同一台
 </code></pre><p>主机所以使用127.0.0.1,如果不是放在同一台主机的请使用公网ip</p>
 <pre><code>$ chown -R git:git test    //test目录拥有设为git(如果test有其他的拥有者，可以把git加入其目录拥有者的组)
-</code></pre><blockquote>
-<ol>
-<li>编写自动更新钩子</li>
-</ol>
-</blockquote>
+</code></pre><p>编写自动更新钩子</p>
 <pre><code>$ cd /home/git/test.git/hooks/
 $ vim post-receive
 </code></pre><blockquote>
@@ -638,7 +633,7 @@ ssh-add -k ~/.ssh/id_rsa
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github初始设置"><span class="nav-text">github初始设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私服搭建git服务器"><span class="nav-text">私服搭建git服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git服务器搭建post-receive-钩子部署服务端代码"><span class="nav-text">git服务器搭建post-receive 钩子部署服务端代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、git服务器搭建-服务器用户：root"><span class="nav-text">一、git服务器搭建(服务器用户：root)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作"><span class="nav-text">二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-报错-密钥-公钥"><span class="nav-text">git 报错 密钥 公钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git常用命令"><span class="nav-text">git常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git专用名词的译名"><span class="nav-text">git专用名词的译名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、新建代码库"><span class="nav-text">一、新建代码库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、配置"><span class="nav-text">二、配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、增加-删除文件"><span class="nav-text">三、增加/删除文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、代码提交"><span class="nav-text">四、代码提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、分支"><span class="nav-text">五、分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、标签"><span class="nav-text">六、标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、查看信息"><span class="nav-text">七、查看信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、远程同步"><span class="nav-text">八、远程同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九、撤销"><span class="nav-text">九、撤销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十、其他"><span class="nav-text">十、其他</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github初始设置"><span class="nav-text">github初始设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私服搭建git服务器"><span class="nav-text">私服搭建git服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git服务器搭建post-receive-钩子部署服务端代码"><span class="nav-text">git服务器搭建post-receive 钩子部署服务端代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、git服务器搭建-服务器用户：root"><span class="nav-text">一、git服务器搭建(服务器用户：root)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作"><span class="nav-text">二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web服务器设置"><span class="nav-text">web服务器设置:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-报错-密钥-公钥"><span class="nav-text">git 报错 密钥 公钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git常用命令"><span class="nav-text">git常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git专用名词的译名"><span class="nav-text">git专用名词的译名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、新建代码库"><span class="nav-text">一、新建代码库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、配置"><span class="nav-text">二、配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、增加-删除文件"><span class="nav-text">三、增加/删除文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、代码提交"><span class="nav-text">四、代码提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、分支"><span class="nav-text">五、分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、标签"><span class="nav-text">六、标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、查看信息"><span class="nav-text">七、查看信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、远程同步"><span class="nav-text">八、远程同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九、撤销"><span class="nav-text">九、撤销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十、其他"><span class="nav-text">十、其他</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
