@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Jon">
 <meta property="og:description" content="文档整体解决方案(readthedocs、github 、sphinx)使用 123456789101112131415mac 下git命令自动补全&amp;gt; http://blog.csdn.net/chenbifeng/article/details/51570606github搭建个人博客&amp;gt; http://blog.csdn.net/yuexianchang/article/detail">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T14:57:06.467Z">
+<meta property="og:updated_time" content="2017-11-29T14:58:48.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git_基本操作">
 <meta name="twitter:description" content="文档整体解决方案(readthedocs、github 、sphinx)使用 123456789101112131415mac 下git命令自动补全&amp;gt; http://blog.csdn.net/chenbifeng/article/details/51570606github搭建个人博客&amp;gt; http://blog.csdn.net/yuexianchang/article/detail">
@@ -353,7 +353,29 @@
       
         <p>文档整体解决方案(readthedocs、github 、sphinx)使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mac 下git命令自动补全</span><br><span class="line">&gt; http://blog.csdn.net/chenbifeng/article/details/51570606</span><br><span class="line"></span><br><span class="line">github搭建个人博客</span><br><span class="line">&gt; http://blog.csdn.net/yuexianchang/article/details/53431703</span><br><span class="line"></span><br><span class="line">hexo github搭建个人博客mac 版</span><br><span class="line">&gt; http://blog.csdn.net/superchao_5/article/details/51963942</span><br><span class="line"></span><br><span class="line">hexo next 主题:</span><br><span class="line">&gt; http://theme-next.iissnan.com/</span><br><span class="line"></span><br><span class="line">godaddy买域名</span><br><span class="line"></span><br><span class="line">&gt; https://sg.godaddy.com/zh/offers/default.aspx</span><br></pre></td></tr></table></figure>
-
+<p>chrome github 插件:Octotree</p>
+<h2 id="github初始设置"><a href="#github初始设置" class="headerlink" title="github初始设置"></a>github初始设置</h2><p>添加&amp;新建一个github仓库到本地<br>新建一个README.md</p>
+<pre><code>echo &quot;# Ayuan&quot; &gt;&gt; README.md
+</code></pre><p>初始化</p>
+<pre><code>git init
+git add README.md
+git commit -m &quot;first commit&quot;
+</code></pre><p>添加远程项目到本地</p>
+<pre><code>git remote add origin git@github.com:jon-ccc/Ayuan.git
+</code></pre><p>上传本地的代码到服务器</p>
+<pre><code>git push -u origin master
+</code></pre><p>把服务器项目下载到本地</p>
+<pre><code>git pull git@github.com:jon-ccc/jon.git
+</code></pre><p>克隆一个项目</p>
+<pre><code>git clone git@github.com:jon-ccc/jon.git
+</code></pre><p>三步上传</p>
+<pre><code>git add . #添加所有改动过的文件
+git commit -m . #提交所有改动过的文件
+git push
+</code></pre><p>关联github并上传本地的仓库</p>
+<pre><code>git remote add origin git@github.com:jon-ccc/Ayuan.git
+git push -u origin master
+</code></pre>
       
     </div>
     
@@ -435,8 +457,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -498,6 +529,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github初始设置"><span class="nav-text">github初始设置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
