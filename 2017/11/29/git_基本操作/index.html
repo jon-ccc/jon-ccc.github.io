@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Jon">
 <meta property="og:description" content="文档整体解决方案(readthedocs、github 、sphinx)使用 123456789101112131415mac 下git命令自动补全&amp;gt; http://blog.csdn.net/chenbifeng/article/details/51570606github搭建个人博客&amp;gt; http://blog.csdn.net/yuexianchang/article/detail">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T15:01:33.778Z">
+<meta property="og:updated_time" content="2017-11-29T15:15:55.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git_基本操作">
 <meta name="twitter:description" content="文档整体解决方案(readthedocs、github 、sphinx)使用 123456789101112131415mac 下git命令自动补全&amp;gt; http://blog.csdn.net/chenbifeng/article/details/51570606github搭建个人博客&amp;gt; http://blog.csdn.net/yuexianchang/article/detail">
@@ -393,7 +393,7 @@ $ chown -R git:git ../git
 $ cat /userdir/.ssh/id_rsa.pub    //把显示的内容复制到服务端的authorized_keys文件里
 </code></pre><p>然后把git仓库拷贝下来</p>
 <pre><code>$ git clone ssh://git@123.456.78.9/home/git/test.git
-</code></pre><p>测试操作（git push完成后git自动对web目录做git pull操作）</p>
+</code></pre><p>测试操作(git push完成后git自动对web目录做git pull操作）</p>
 <pre><code>$ cd test
 $ git pull origin master
 $ touch test.txt
@@ -401,7 +401,7 @@ $ git add .
 $ git commit -m&apos;test&apos;
 $ git push origin master
 </code></pre><p>web服务器:</p>
-<p>使用git用户生成git密钥（把客户端的公钥（id_rsa.pb文件内容）添加到authorized_keys文件，git push操作就不需要每次都输入密码了</p>
+<p>使用git用户生成git密钥(把客户端的公钥(id_rsa.pb文件内容）添加到authorized_keys文件，git push操作就不需要每次都输入密码了</p>
 <pre><code>$ sudo -u git ssh-keygen -t rsa -C “test@qq.com”   //生成密钥
 $ cd /home/git/.ssh
 $ cat id_rsa.pub&gt;&gt;authorized_keys  //把公钥加入authorized_keys文件
@@ -422,7 +422,7 @@ $ vim post-receive
 </blockquote>
 <pre><code>#!/bin/sh
 cd /home/test/
-unset GIT_DIR    //清空git的工作目录，git才可以进入/home/test/工作目录（没有使用该代码，报错:remote: fatal: Not a git repository: &apos;.&apos;)
+unset GIT_DIR    //清空git的工作目录，git才可以进入/home/test/工作目录(没有使用该代码，报错:remote: fatal: Not a git repository: &apos;.&apos;)
 git config --list
 git pull origin master
 </code></pre><p>给钩子文件添加执行权限</p>
