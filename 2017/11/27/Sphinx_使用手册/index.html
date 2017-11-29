@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ajsfk ," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="RESTRUCTUREDTEXT 简介参考: http://www.jianshu.com/p/1885d5570b37 写大型文档">
+<meta name="keywords" content="ajsfk ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reStructuredText 使用手册">
+<meta property="og:url" content="http://yoursite.com/2017/11/27/Sphinx_使用手册/index.html">
+<meta property="og:site_name" content="Jon">
+<meta property="og:description" content="RESTRUCTUREDTEXT 简介参考: http://www.jianshu.com/p/1885d5570b37 写大型文档">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-28T17:07:57.322Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="reStructuredText 使用手册">
+<meta name="twitter:description" content="RESTRUCTUREDTEXT 简介参考: http://www.jianshu.com/p/1885d5570b37 写大型文档">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/27/Sphinx_使用手册/"/>
+
+
+
+
+
+  <title>reStructuredText 使用手册 | Jon</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">啊园</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/Sphinx_使用手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">reStructuredText 使用手册</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T16:13:58+08:00">
+                2017-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="RESTRUCTUREDTEXT-简介"><a href="#RESTRUCTUREDTEXT-简介" class="headerlink" title="RESTRUCTUREDTEXT 简介"></a>RESTRUCTUREDTEXT 简介</h2><p>参考: <a href="http://www.jianshu.com/p/1885d5570b37" target="_blank" rel="noopener">http://www.jianshu.com/p/1885d5570b37</a></p>
+<p>写大型文档</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">«  调用 sphinx-build   ::   Contents   ::   Sphinx标记的组成  »</span><br></pre></td></tr></table></figure>
+<h2 id="reStructuredText-简介"><a href="#reStructuredText-简介" class="headerlink" title="reStructuredText 简介"></a>reStructuredText 简介</h2><p>本章节介绍 reStructuredText (reST) 的概念和语法，为文档生成者提供足够的信息. reST 被认为是简单，实用的标记语言，因此学习它不会花太多时间.</p>
+<p>See also<br>读物 reStructuredText User Documentation. 文档内 “ref” 链接指向reST的分类参考文献.</p>
+<h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">段落 (:duref:`ref &lt;paragraphs&gt;`) 是reST 文件的基本模块. 段落是由空行分隔的一段文本. 和Python一样, 对齐也是reST的操作符, 因此同一段落的行都是左对齐的.</span><br></pre></td></tr></table></figure>
+<h2 id="内联标记"><a href="#内联标记" class="headerlink" title="内联标记"></a>内联标记</h2><p>标准的reST 内联标记相当简单:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">星号: *text* 是强调 (斜体),</span><br><span class="line">双星号: **text** 重点强调 (加粗),</span><br><span class="line">反引号: ``text`` 代码样式.</span><br></pre></td></tr></table></figure></p>
+<p>星号及反引号在文本中容易与内联标记符号混淆，可使用反斜杠符号转义.</p>
+<p>标记需注意的一些限制:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">不能相互嵌套,</span><br><span class="line">内容前后不能由空白: 这样写``* text*`` 是错误的,</span><br><span class="line">如果内容需要特殊字符分隔. 使用反斜杠转义，如: thisis\ *one*\ word.</span><br><span class="line">这些限制在未来版本可能会被改善.</span><br><span class="line"></span><br><span class="line">reST 也允许自定义 “文本解释角色”’, 这意味着可以以特定的方式解释文本. Sphinx以此方式提供语义标记及参考索引，操作符为 :rolename:`content`.</span><br><span class="line"></span><br><span class="line">标准reST 提供以下规则:</span><br><span class="line"></span><br><span class="line">    :durole:`emphasis` – 写成 *emphasis*</span><br><span class="line">    :durole:`strong` – 写成 **strong**</span><br><span class="line">    :durole:`literal` – 写成 ``literal``</span><br><span class="line">    :durole:`subscript` – 下标</span><br><span class="line">    :durole:`superscript` – 上标</span><br><span class="line">    :durole:`title-reference` – 书、期刊等材料的标题</span><br></pre></td></tr></table></figure></p>
+<p>详情请查看 内联标记 .</p>
+<h2 id="列表与引用"><a href="#列表与引用" class="headerlink" title="列表与引用"></a>列表与引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">列表标记 (:duref:`ref &lt;bullet-lists&gt;`) 的使用最自然: 仅在段落的开头放置一个星号和一个缩进. 编号的列表也可以;也可以使用符号 # 自动加序号:</span><br><span class="line"></span><br><span class="line">* 这是一个项目符号列表.</span><br><span class="line">* 它有两项，</span><br><span class="line">  第二项使用两行.</span><br><span class="line"></span><br><span class="line">1. 这是个有序列表.</span><br><span class="line">2. 也有两项.</span><br><span class="line"></span><br><span class="line">#. 是个有序列表.</span><br><span class="line">#. 也有两项.</span><br></pre></td></tr></table></figure>
+<p>列表可以嵌套，但是需跟父列表使用空行分隔<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* 这是</span><br><span class="line">* 一个列表</span><br><span class="line"></span><br><span class="line">  * 嵌套列表</span><br><span class="line">  * 子项</span><br><span class="line"></span><br><span class="line">* 父列表继续</span><br><span class="line">定义列表 (:duref:`ref &lt;definition-lists&gt;`)</span><br></pre></td></tr></table></figure></p>
+<p>术语 (term 文本开头行)<br>   定义术语，必须缩进</p>
+<p>   可以有多段组成</p>
+<p>下一术语（term）<br>   描述.<br>一行仅能写一个术语.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">引用段落 (:duref:`ref &lt;block-quotes&gt;`) 仅使用缩进（相对于周围段落）创建.</span><br><span class="line">行模块 (:duref:`ref &lt;line-blocks&gt;`) 可以这样分隔</span><br><span class="line">| 这些行</span><br><span class="line">| 在源文件里</span><br><span class="line">| 被分隔的一模一样.</span><br></pre></td></tr></table></figure>
+<p>还有其他有用的模块:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">字段列表 (:duref:`ref &lt;field-lists&gt;`)</span><br><span class="line">选项列表(:duref:`ref &lt;option-lists&gt;`)</span><br><span class="line">字面引用模块 (:duref:`ref &lt;quoted-literal-blocks&gt;`)</span><br><span class="line">文档测试模块 (:duref:`ref &lt;doctest-blocks&gt;`)</span><br></pre></td></tr></table></figure></p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字面代码块 (:duref:`ref &lt;literal-blocks&gt;`) 在段落的后面使用标记 :: 引出. 代码块必须缩进(同段落，需要与周围文本以空行分隔):</span><br></pre></td></tr></table></figure>
+<p>这是一段正常文本. 下一段是代码文字::</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">它不需要特别处理，仅是</span><br><span class="line">缩进就可以了.</span><br><span class="line"></span><br><span class="line">它可以有多行.</span><br></pre></td></tr></table></figure>
+<p>再是正常的文本段.</p>
+<p>这个 :: 标记很优雅:</p>
+<p>如果作为独立段落存在,则整段都不会出现在文档里.<br>如果前面有空白，则标记被移除.<br>如果前面是非空白，则标记被一个冒号取代.<br>因此上面的例子第一段文字将变为”下一段是代码文字:”.</p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>支持两种表格. 一种是 网格表格 (:duref:<code>ref &lt;grid-tables&gt;</code>), 可以自定义表格的边框. 如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+------------------------+------------+----------+----------+</span><br><span class="line">| Header row, column 1   | Header 2   | Header 3 | Header 4 |</span><br><span class="line">| (header rows optional) |            |          |          |</span><br><span class="line">+========================+============+==========+==========+</span><br><span class="line">| body row 1, column 1   | column 2   | column 3 | column 4 |</span><br><span class="line">+------------------------+------------+----------+----------+</span><br><span class="line">| body row 2             | ...        | ...      |          |</span><br><span class="line">+------------------------+------------+----------+----------+</span><br><span class="line"></span><br><span class="line">简单表格 (:duref:`ref &lt;simple-tables&gt;`) 书写简单, 但有一些限制: 需要有多行，且第一列元素不能分行显示，如下:</span><br><span class="line"></span><br><span class="line">=====  =====  =======</span><br><span class="line">A      B      A and B</span><br><span class="line">=====  =====  =======</span><br><span class="line">False  False  False</span><br><span class="line">True   False  False</span><br><span class="line">False  True   False</span><br><span class="line">True   True   True</span><br><span class="line">=====  =====  =======</span><br></pre></td></tr></table></figure></p>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>外部链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用 `链接文本 &lt;http://example.com/&gt;`_ 可以插入网页链接. 链接文本是网址，则不需要特别标记，分析器会自动发现文本里的链接或邮件地址.</span><br><span class="line"></span><br><span class="line">可以把链接和标签分开 (:duref:`ref &lt;hyperlink-targets&gt;`), 如下:</span><br><span class="line"></span><br><span class="line">段落里包含 `a link`_.</span><br><span class="line">.. _a link: http://example.com/</span><br></pre></td></tr></table></figure>
+<h2 id="内部链接"><a href="#内部链接" class="headerlink" title="内部链接"></a>内部链接</h2><p>内部链接是Sphinx特定的reST角色, 查看章节 交叉索引的位置.</p>
+<h2 id="章节"><a href="#章节" class="headerlink" title="章节"></a>章节</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">章节的标题 (:duref:`ref &lt;sections&gt;`) 在双上划线符号之间（或为下划线）, 并且符号的长度不能小于文本的长度:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">This is a heading</span><br><span class="line">=================</span><br></pre></td></tr></table></figure>
+<p>标题的等级:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">一级标题</span><br><span class="line">=========</span><br><span class="line"></span><br><span class="line">二级标题</span><br><span class="line">---------</span><br><span class="line"></span><br><span class="line">三级标题</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line">四级标题</span><br><span class="line">:::::::::</span><br><span class="line"></span><br><span class="line">六级标题</span><br><span class="line">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>当然也可以标记（查看 reST 文档), 定义章节的层次，但是需要注意输出格式(HTML, LaTeX)所支持的层次深度 .</p>
+<h2 id="显式标记"><a href="#显式标记" class="headerlink" title="显式标记"></a>显式标记</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">显式标记”Explicit markup” (:duref:`ref &lt;explicit-markup-blocks&gt;`) 用在那些需做特殊处理的reST结构中, 如尾注，突出段落，评论，通用指令.</span><br></pre></td></tr></table></figure>
+<p>显式标记以 .. 开始，后跟空白符，与下面段落的缩进一样. (在显示标记与正常的段落间需有空行，这听起来有些复杂，但是写起来会非常直观.)</p>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">指令 (:duref:`ref &lt;directives&gt;`) 是显式标记最常用的模块. 也是reST 的扩展规则, 在 Sphinx 经常被用到.</span><br><span class="line"></span><br><span class="line">文档工具支持以下指令:</span><br><span class="line"></span><br><span class="line">警告: :dudir:`attention`, :dudir:`caution`, :dudir:`danger`, :dudir:`error`, :dudir:`hint`, :dudir:`important`, :dudir:`note`, :dudir:`tip`, :dudir:`warning` 及通用标记 :dudir:`admonition`. (大多数模式仅支持 “note” 及 “warning” )</span><br><span class="line"></span><br><span class="line">图像:</span><br><span class="line"></span><br><span class="line">:dudir:`image` (详情可看下面的 图像 )</span><br><span class="line">:dudir:`figure` (有标题及可选说明的图像)</span><br><span class="line">额外的主体元素:</span><br><span class="line"></span><br><span class="line">:dudir:`contents &lt;table-of-contents&gt;` (本地，仅是当前文件的内容表格)</span><br><span class="line">:dudir:`container` (自定义容器，用来生成HTML的 &lt;div&gt; )</span><br><span class="line">:dudir:`rubric` (和文档章节无关的标题)</span><br><span class="line">:dudir:`topic`, :dudir:`sidebar` (高亮显示的主体元素)</span><br><span class="line">:dudir:`parsed-literal` (支持内联标记的斜体模块)</span><br><span class="line">:dudir:`epigraph` (可选属性行的摘要模块)</span><br><span class="line">:dudir:`highlights`, :dudir:`pull-quote` (有自己的类属性的摘要模块)</span><br><span class="line">:dudir:`compound` ( 复合段落)</span><br><span class="line"></span><br><span class="line">专用表格:</span><br><span class="line"></span><br><span class="line">:dudir:`table` (有标题的表格)</span><br><span class="line">:dudir:`csv-table` (CSV自动生成表格)</span><br><span class="line">:dudir:`list-table` (列表生成的表格)</span><br><span class="line"></span><br><span class="line">专用指令:</span><br><span class="line"></span><br><span class="line">:dudir:`raw` (包含原始格式的标记)</span><br><span class="line">:dudir:`include` (包含reStructuredText标记的文件) – 在Sphinx中,如果包含绝对文件路径，指令会以源目录地址做为参照</span><br><span class="line">:dudir:`class` (将类属性指派给下一个元素) [1]</span><br><span class="line"></span><br><span class="line">HTML 特性:</span><br><span class="line"></span><br><span class="line">:dudir:`meta` (生成HTML &lt;meta&gt; 标签)</span><br><span class="line">:dudir:`title` (覆盖文档标题)</span><br><span class="line"></span><br><span class="line">影响标记:</span><br><span class="line"></span><br><span class="line">:dudir:`default-role` (设置新的默认角色)</span><br><span class="line">:dudir:`role` (创建新的角色)</span><br><span class="line">如果仅有一个文件，最好使用 :confval:`default_role`.</span><br><span class="line"></span><br><span class="line">设置不使用指令 :dudir:`sectnum`, :dudir:`header` 及 :dudir:`footer`.</span><br><span class="line"></span><br><span class="line">Sphinx 新增指令可查阅 Sphinx标记的组成.</span><br><span class="line"></span><br><span class="line">指令有名字，参数，选项及内容组成. (记住这些，在下面一小节中自定义指令里会用到).来看一个例子:</span><br><span class="line"></span><br><span class="line">.. function:: foo(x)</span><br><span class="line">              foo(y, z)</span><br><span class="line">   :module: some.module.name</span><br><span class="line"></span><br><span class="line">   返回用户输入的一行文本.</span><br><span class="line">function 是指令名字. 在第一行和第二行给出了两个参数, 及一个选项 module (如你所见，选项在参数后给出，由冒号引出). 选项必须与指令有一样的缩进.</span><br><span class="line"></span><br><span class="line">指令的内容在隔开一个空行后，与指令有一样缩进.</span><br></pre></td></tr></table></figure>
+<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reST 支持图像指令 (:dudir:`ref &lt;image&gt;`), 如下:</span><br><span class="line"></span><br><span class="line">.. image:: gnu.png</span><br></pre></td></tr></table></figure>
+<p>   (选项)<br>这里给出的文件名( gnu.png) 必须是源文件的相对路径，如果是绝对路径则以源目录为根目录. 例如，在文件 sketch/spam.rst 引用图像 images/spam.png ，则使用 ../images/spam.png 或者 /images/spam.png.</p>
+<p>Sphinx 会自动将图像文件拷贝到输出目录的子目录里，( 输出HTML时目录为 _static )</p>
+<p>图像的大小选项 (width 及 height) : 如果没有单位或单位为像素, 给定的尺寸信息仅在输出通道支持像素时才有用 ( 如输出LaTeX 没用). 其他单位在输出(如 pt )HTML、LaTeX 时被用到.</p>
+<p>Sphinx 延伸了标准的文档化行为，只需在后面加星号:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.. image:: gnu.*</span><br></pre></td></tr></table></figure></p>
+<p>上面这样写，Sphinx 会搜索所有名字匹配的图像，而不管图像类型. 每个生成器则会选择最合适的图像. 一般，在源文件目录里文件名 gnu.* 会含有两个文件 gnu.pdf 和 gnu.png , LaTeX 生成器会选择前者，而HTML 生成器则匹配后者.</p>
+<p>Changed in version 0.4: 添加对文件名以星号结束的支持.</p>
+<p>Changed in version 0.6: 图像路径可以是绝对路径.</p>
+<h2 id="尾注"><a href="#尾注" class="headerlink" title="尾注"></a>尾注</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">尾注 (:duref:`ref &lt;footnotes&gt;`), 使用 [#name]_ 标记尾注的位置, 尾注的内容则在文档底部红色标题”Footnotes”的后面 , 如下:</span><br><span class="line"></span><br><span class="line">Lorem ipsum [#f1]_ dolor sit amet ... [#f2]_</span><br><span class="line"></span><br><span class="line">.. rubric:: Footnotes</span><br><span class="line"></span><br><span class="line">.. [#f1] 第一条尾注的文本.</span><br><span class="line">.. [#f2] 第二条尾注的文本.</span><br></pre></td></tr></table></figure>
+<p>你也可以使用数字尾注 ([1]<em>) 或使用自动排序的([#]</em>).</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">支持标准的reST 引用 (:duref:`ref &lt;citations&gt;`) , 且新增了”global”特性, 所有参考文献不受所在文件的限制. 如:</span><br><span class="line"></span><br><span class="line">Lorem ipsum [Ref]_ dolor sit amet.</span><br><span class="line"></span><br><span class="line">.. [Ref] 参考文献, 书,URL 等.</span><br><span class="line">引用的使用同尾注很相近，但是它们没有数字标签或以 # 开始.</span><br></pre></td></tr></table></figure>
+<h2 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">reST 支持替换 “substitutions” (:duref:`ref &lt;substitution-definitions&gt;`), 有一小段文本或标记被关联到 |name|. 定义与尾注一样需有明确的标记块，如下:</span><br><span class="line"></span><br><span class="line">.. |name| replace:: replacement *text*</span><br><span class="line">或者:</span><br><span class="line"></span><br><span class="line">.. |caution| image:: warning.png</span><br><span class="line">             :alt: Warning!</span><br><span class="line">详情查看 :duref:`reST reference for substitutions &lt;substitution-definitions&gt;` .</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果想在所有文档中使用这些替换, 需把它们放在 :confval:`rst_prolog` 或一个单独文件里， 然后在使用它们的文档文件里包含这个文件，包含指令 include . (请给出包含文件的扩展名，已区别于其他的源文件，避免Sphinx将其作为独立的文档文件.)</span><br></pre></td></tr></table></figure>
+<p>Sphinx 定义了一些默认的替换, 请查看 替换.</p>
+<h2 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">有明确标记块但又不是有效的结构标记的标记 (像上面的尾注）都被视为评论 (:duref:`ref &lt;comments&gt;`). 例如:</span><br><span class="line"></span><br><span class="line">.. 这是一个评论.</span><br><span class="line">可以通过缩进产生多行评论:</span><br><span class="line"></span><br><span class="line">..</span><br><span class="line">   这整个缩进块都是</span><br><span class="line">   一个评论.</span><br><span class="line"></span><br><span class="line">   仍是一个评论.</span><br></pre></td></tr></table></figure>
+<h2 id="源编码"><a href="#源编码" class="headerlink" title="源编码"></a>源编码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在reST使用Unicode字符可以容易的包含特殊字符如破折号，版权标志. Sphinx 默认源文件使用UTF-8 编码; 你可以通过 :confval:`source_encoding` 的配置值改变编码.</span><br></pre></td></tr></table></figure>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p>具体使用中可能会遇到一些问题:</p>
+<p>内联标记的分离 如上面所讲，内联标记需与周围的文本使用空格分隔, 内联标记内部则使用反斜线转义空格. 查看详情: the reference .<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内联标记不能嵌套 像这样写 *see :func:`foo`* 是不允许的.</span><br></pre></td></tr></table></figure></p>
+<p>Footnotes</p>
+<p>[1] 当默认主域里包含指令 class , 这个指令将被隐藏 因此, Sphinx使用 rst-class.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ajsfk/" rel="tag"># ajsfk </a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/27/Hexo+NextT基本设置/" rel="next" title="Hexo+NextT基本设置">
+                <i class="fa fa-chevron-left"></i> Hexo+NextT基本设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/27/MySQL/" rel="prev" title="MySQL">
+                MySQL <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jon</p>
+              <p class="site-description motion-element" itemprop="description">You are the meaning of my life</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTRUCTUREDTEXT-简介"><span class="nav-text">RESTRUCTUREDTEXT 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reStructuredText-简介"><span class="nav-text">reStructuredText 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段落"><span class="nav-text">段落</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内联标记"><span class="nav-text">内联标记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表与引用"><span class="nav-text">列表与引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-text">表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超链接"><span class="nav-text">超链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部链接"><span class="nav-text">内部链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#章节"><span class="nav-text">章节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显式标记"><span class="nav-text">显式标记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令"><span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像"><span class="nav-text">图像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尾注"><span class="nav-text">尾注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换"><span class="nav-text">替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评论"><span class="nav-text">评论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源编码"><span class="nav-text">源编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-text">常见问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
