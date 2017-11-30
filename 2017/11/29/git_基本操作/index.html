@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Jon">
 <meta property="og:description" content="git的基本命令与服务搭建…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-29T18:02:20.088Z">
+<meta property="og:updated_time" content="2017-11-30T03:12:29.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git_基本操作">
 <meta name="twitter:description" content="git的基本命令与服务搭建…">
@@ -373,7 +373,7 @@ godaddy买域名
 https://sg.godaddy.com/zh/offers/default.aspx
 
 chrome github 插件:Octotree
-</code></pre><h2 id="github初始设置"><a href="#github初始设置" class="headerlink" title="github初始设置"></a>github初始设置</h2><p>添加&amp;新建一个github仓库到本地<br>新建一个README.md</p>
+</code></pre><h2 id="github初始设置"><a href="#github初始设置" class="headerlink" title="github初始设置"></a>github初始设置</h2><h4 id="添加-amp-新建一个github仓库到本地"><a href="#添加-amp-新建一个github仓库到本地" class="headerlink" title="添加&amp;新建一个github仓库到本地"></a>添加&amp;新建一个github仓库到本地</h4><p>新建一个README.md</p>
 <pre><code>echo &quot;# Ayuan&quot; &gt;&gt; README.md
 </code></pre><p>初始化</p>
 <pre><code>git init
@@ -385,16 +385,14 @@ git commit -m &quot;first commit&quot;
 <pre><code>git push -u origin master
 </code></pre><p>把服务器项目下载到本地</p>
 <pre><code>git pull git@github.com:jon-ccc/jon.git
-</code></pre><p>克隆一个项目</p>
-<pre><code>git clone git@github.com:jon-ccc/jon.git
-</code></pre><p>三步上传</p>
-<pre><code>git add . #添加所有改动过的文件
+</code></pre><h4 id="克隆一个项目"><a href="#克隆一个项目" class="headerlink" title="克隆一个项目"></a>克隆一个项目</h4><pre><code>git clone git@github.com:jon-ccc/jon.git
+</code></pre><h4 id="三步上传"><a href="#三步上传" class="headerlink" title="三步上传"></a>三步上传</h4><pre><code>git add . #添加所有改动过的文件
 git commit -m . #提交所有改动过的文件
 git push
-</code></pre><p>关联github并上传本地的仓库</p>
-<pre><code>git remote add origin git@github.com:jon-ccc/Ayuan.git
+</code></pre><h4 id="关联github并上传本地的仓库"><a href="#关联github并上传本地的仓库" class="headerlink" title="关联github并上传本地的仓库"></a>关联github并上传本地的仓库</h4><pre><code>git remote add origin git@github.com:jon-ccc/Ayuan.git
 git push -u origin master
-</code></pre><h2 id="私服搭建git服务器"><a href="#私服搭建git服务器" class="headerlink" title="私服搭建git服务器"></a>私服搭建git服务器</h2><p>git服务器搭建post-receive 钩子部署服务端代码</p>
+</code></pre><hr>
+<h2 id="私服搭建git服务器"><a href="#私服搭建git服务器" class="headerlink" title="私服搭建git服务器"></a>私服搭建git服务器</h2><p>git服务器搭建post-receive 钩子部署服务端代码</p>
 <h4 id="一、git服务器搭建-服务器用户：root"><a href="#一、git服务器搭建-服务器用户：root" class="headerlink" title="一、git服务器搭建(服务器用户：root)"></a>一、git服务器搭建(服务器用户：root)</h4><p>安装git</p>
 <pre><code>$ apt-get install git
 </code></pre><p>创建git用户</p>
@@ -443,7 +441,8 @@ git pull origin master
 </code></pre><p>给钩子文件添加执行权限</p>
 <pre><code>$ cd /home/git/test.git/hooks/
 $ chmod +x post-recevie  //给钩子文件添加执行权限
-</code></pre><h2 id="git-报错-密钥-公钥"><a href="#git-报错-密钥-公钥" class="headerlink" title="git 报错 密钥 公钥"></a>git 报错 密钥 公钥</h2><blockquote>
+</code></pre><hr>
+<h2 id="git-报错-添加密钥-公钥-publickey"><a href="#git-报错-添加密钥-公钥-publickey" class="headerlink" title="git 报错 添加密钥 公钥 publickey"></a>git 报错 添加密钥 公钥 publickey</h2><blockquote>
 <p>   参考:(<a href="https://help.github.com/articles/connecting-to-github-with-ssh/" target="_blank" rel="noopener">https://help.github.com/articles/connecting-to-github-with-ssh/</a>)</p>
 </blockquote>
 <pre><code>Permission denied (publickey).
@@ -451,15 +450,24 @@ fatal: Could not read from remote repository.
 
 Please make sure you have the correct access rights
 and the repository exists.
-</code></pre><p>添加一个新的SSH密钥到你的GitHub帐户<br>生成一个ssh密钥<br>执行下面命令.替换您的GitHub电子邮件地址</p>
+</code></pre><p>添加一个新的SSH密钥到你的GitHub帐户</p>
+<h4 id="一-生成一个ssh密钥"><a href="#一-生成一个ssh密钥" class="headerlink" title="一.生成一个ssh密钥"></a>一.生成一个ssh密钥</h4><p>执行下面命令.替换您的GitHub电子邮件地址</p>
 <pre><code>cd ~/.ssh/
-ssh-keygen -t rsa -b 4096 -C &quot;xxx@gmail.com”
+ssh-keygen -t rsa -b 4096 -C&quot;xxx@gmail.com&quot; # 注意C后面不能有空格
 </code></pre><p>下面3个,请按Enter键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># ssh-keygen -t rsa -b  4096 -C&quot;XXX@mail.com&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa):  #回车 </span><br><span class="line">Enter passphrase (empty for no passphrase): #回车</span><br><span class="line">Enter same passphrase again: #回车</span><br><span class="line">Your identification has been saved in /root/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /root/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">5f:29:2a:75:e3:03:9d:94:99:35:c8:48:6f:7b:b5:a2 XXX@mail.com</span><br><span class="line">The key&apos;s randomart image is:</span><br><span class="line">+--[ RSA 4096]----+</span><br><span class="line">|       ..o .o    |</span><br><span class="line">|        ..o= .   |</span><br><span class="line">|          B   .  |</span><br><span class="line">|         + o o . |</span><br><span class="line">|        S B = .  |</span><br><span class="line">|       . * * .   |</span><br><span class="line">|      . . E      |</span><br><span class="line">|       .   .     |</span><br><span class="line">|                 |</span><br><span class="line">+-----------------+</span><br></pre></td></tr></table></figure>
 <p>将您的SSH密钥添加到ssh-agent</p>
 <pre><code>eval &quot;$(ssh-agent -s)&quot;
 ssh-add -k ~/.ssh/id_rsa
-</code></pre><p>添加一个新的SSH密钥到你的GitHub帐户<br>将id_rsa.pub文件的内容复制到剪贴板 vim ~/.ssh/id_rsa.pub</p>
-<h2 id="git常用命令"><a href="#git常用命令" class="headerlink" title="git常用命令"></a>git常用命令</h2><h4 id="git专用名词的译名"><a href="#git专用名词的译名" class="headerlink" title="git专用名词的译名"></a>git专用名词的译名</h4><p>Workspace：工作区<br>Index / Stage：暂存区<br>Repository：仓库区（或本地仓库）<br>Remote：远程仓库</p>
+</code></pre><h4 id="二-添加一个新的SSH密钥到你的GitHub帐户"><a href="#二-添加一个新的SSH密钥到你的GitHub帐户" class="headerlink" title="二.添加一个新的SSH密钥到你的GitHub帐户"></a>二.添加一个新的SSH密钥到你的GitHub帐户</h4><p>将id_rsa.pub文件的内容复制到剪贴板 cat ~/.ssh/id_rsa.pub</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ayuan@~/.ssh#  cat id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC/ZwAp89hmhDwlGg6Q/p/6lQx539nEisC41k0p0Nu1IU0DReZL0wBFzQQWQi4svvLR7sENjoYItIu0d2OLhJPPmI1ey9qHdAIBdK5Bnf9O4nEQ+LSOn2t1UIyRAWRUP9DJtQQg9lIC1807x+v1IQ5LE2WIECF+rIIrXMgEbJ8TN19BrHP5pzfzf7Zvb4GEKr37yNXvr41bMC1AMO1T/oWTVxWI2NIriHy0wp8sHLHyWfRhUAOcMxd9R918S2rsbcvQja;kdjfjasfj l;ajsfja;ls jf;asjdfjdskfY6xKM7CrEOYE5T4hToA2pA2s6ZWMNidSiLM6QDHtJnW5kxERiLu/lLDam1INzPsObhEKGWBHinHCd3vgaHCwYwHd1WnHaA852InitSDLoGFUybU289tlzzd+Qz88glED14KjN7whzbXS/E4udaYBqH2faJb6fS/aaCLzb6aF4Gls0iRW3b5rf9TEs5mkG/v+EdffvbIEd0UjZF/ZZIUQeeWHN2qm52bn9RnQAdBZI86EMdqbALUN1sZPzwV/byBSf/bAWmGR5MoVvc7gPWZ6X++Q/oKEEMvHreO4HcKTl0SEpXIHybWSQ== xxx@email.com</span><br></pre></td></tr></table></figure>
+<p>登陆自己的GitHub添加一个新的ssh key,粘帖刚刚复制的id_rsa.pub</p>
+<blockquote>
+<p>Settings&gt;SSH and GPG keys&gt;New SSH key </p>
+</blockquote>
+<hr>
+<h2 id="git常用命令"><a href="#git常用命令" class="headerlink" title="git常用命令"></a>git常用命令</h2><p>git专用名词的译名</p>
+<p>Workspace：工作区<br>Index / Stage：暂存区<br>Repository：仓库区（或本地仓库）<br>Remote：远程仓库</p>
 <h4 id="一、新建代码库"><a href="#一、新建代码库" class="headerlink" title="一、新建代码库"></a>一、新建代码库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 在当前目录新建一个Git代码库</span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"># 新建一个目录，将其初始化为Git代码库</span><br><span class="line">$ git init [project-name]</span><br><span class="line"></span><br><span class="line"># 下载一个项目和它的整个代码历史</span><br><span class="line">$ git clone [url]</span><br></pre></td></tr></table></figure>
 <h4 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h4><p>Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 显示当前的Git配置</span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"># 编辑Git配置文件</span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"># 设置提交代码时的用户信息</span><br><span class="line">$ git config [--global] user.name &quot;[name]&quot;</span><br><span class="line">$ git config [--global] user.email &quot;[email address]&quot;</span><br></pre></td></tr></table></figure></p>
 <h4 id="三、增加-删除文件"><a href="#三、增加-删除文件" class="headerlink" title="三、增加/删除文件"></a>三、增加/删除文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 添加指定文件到暂存区</span><br><span class="line">$ git add [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"># 添加指定目录到暂存区，包括子目录</span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"># 添加当前目录的所有文件到暂存区</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"># 添加每个变化前，都会要求确认</span><br><span class="line"># 对于同一个文件的多处变化，可以实现分次提交</span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"># 删除工作区文件，并且将这次删除放入暂存区</span><br><span class="line">$ git rm [file1] [file2] ...</span><br><span class="line"></span><br><span class="line"># 停止追踪指定文件，但该文件会保留在工作区</span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"># 改名文件，并且将这个改名放入暂存区</span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></table></figure>
@@ -634,7 +642,7 @@ ssh-add -k ~/.ssh/id_rsa
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github初始设置"><span class="nav-text">github初始设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私服搭建git服务器"><span class="nav-text">私服搭建git服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、git服务器搭建-服务器用户：root"><span class="nav-text">一、git服务器搭建(服务器用户：root)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作"><span class="nav-text">二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、web服务器设置"><span class="nav-text">三、web服务器设置:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-报错-密钥-公钥"><span class="nav-text">git 报错 密钥 公钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git常用命令"><span class="nav-text">git常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git专用名词的译名"><span class="nav-text">git专用名词的译名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、新建代码库"><span class="nav-text">一、新建代码库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、配置"><span class="nav-text">二、配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、增加-删除文件"><span class="nav-text">三、增加/删除文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、代码提交"><span class="nav-text">四、代码提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、分支"><span class="nav-text">五、分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、标签"><span class="nav-text">六、标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、查看信息"><span class="nav-text">七、查看信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、远程同步"><span class="nav-text">八、远程同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九、撤销"><span class="nav-text">九、撤销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十、其他"><span class="nav-text">十、其他</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github初始设置"><span class="nav-text">github初始设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-amp-新建一个github仓库到本地"><span class="nav-text">添加&新建一个github仓库到本地</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#克隆一个项目"><span class="nav-text">克隆一个项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三步上传"><span class="nav-text">三步上传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联github并上传本地的仓库"><span class="nav-text">关联github并上传本地的仓库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私服搭建git服务器"><span class="nav-text">私服搭建git服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、git服务器搭建-服务器用户：root"><span class="nav-text">一、git服务器搭建(服务器用户：root)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作"><span class="nav-text">二、以上步骤完成git服务器就已经搭建好了，下面来讲一下客户端的使用操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、web服务器设置"><span class="nav-text">三、web服务器设置:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-报错-添加密钥-公钥-publickey"><span class="nav-text">git 报错 添加密钥 公钥 publickey</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-生成一个ssh密钥"><span class="nav-text">一.生成一个ssh密钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-添加一个新的SSH密钥到你的GitHub帐户"><span class="nav-text">二.添加一个新的SSH密钥到你的GitHub帐户</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git常用命令"><span class="nav-text">git常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、新建代码库"><span class="nav-text">一、新建代码库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、配置"><span class="nav-text">二、配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、增加-删除文件"><span class="nav-text">三、增加/删除文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、代码提交"><span class="nav-text">四、代码提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、分支"><span class="nav-text">五、分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、标签"><span class="nav-text">六、标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、查看信息"><span class="nav-text">七、查看信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、远程同步"><span class="nav-text">八、远程同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九、撤销"><span class="nav-text">九、撤销</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十、其他"><span class="nav-text">十、其他</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
