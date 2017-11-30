@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="scrapy配置===============">
+<meta name="description" content="scrapy配置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式爬虫scrapy-redis的蜘蛛基本配置">
 <meta property="og:url" content="http://yoursite.com/2017/11/23/spiders配置/index.html">
 <meta property="og:site_name" content="Jon">
-<meta property="og:description" content="scrapy配置===============">
+<meta property="og:description" content="scrapy配置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-30T01:44:16.999Z">
+<meta property="og:updated_time" content="2017-11-30T01:46:00.021Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式爬虫scrapy-redis的蜘蛛基本配置">
-<meta name="twitter:description" content="scrapy配置===============">
+<meta name="twitter:description" content="scrapy配置">
 
 
 
@@ -351,7 +351,7 @@
       
 
       
-        <h1 id="scrapy配置"><a href="#scrapy配置" class="headerlink" title="scrapy配置"></a>scrapy配置</h1><p>===============</p>
+        <h1 id="scrapy配置"><a href="#scrapy配置" class="headerlink" title="scrapy配置"></a>scrapy配置</h1><hr>
 <a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import scrapy</span><br><span class="line">from scrapy.linkextractors import LinkExtractor</span><br><span class="line">from scrapy.spiders import CrawlSpider, Rule</span><br><span class="line">import re</span><br><span class="line">import datetime</span><br><span class="line">from datetime import timedelta</span><br><span class="line"># from Qiji_Project.items import DhinahrItem</span><br><span class="line"></span><br><span class="line">from scrapy_redis.spiders import RedisCrawlSpider#爬虫集成</span><br></pre></td></tr></table></figure>
 <p> 给redis加一个key 启动爬虫<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpush chinahrspider:start_urls http://www.chinahr.com/</span><br></pre></td></tr></table></figure></p>
