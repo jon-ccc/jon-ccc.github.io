@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="scrap-redis使用手册settings.py 设置12345678910# -*- coding: utf-8 -*-# Scrapy settings for Qiji_Project project## For simplicity, this file contains only settings con">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jon">
+<meta property="og:url" content="http://yoursite.com/2017/11/23/scrapy-redis使用手册/index.html">
+<meta property="og:site_name" content="Jon">
+<meta property="og:description" content="scrap-redis使用手册settings.py 设置12345678910# -*- coding: utf-8 -*-# Scrapy settings for Qiji_Project project## For simplicity, this file contains only settings considered important or# commonly used. You">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-23T09:04:47.917Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jon">
+<meta name="twitter:description" content="scrap-redis使用手册settings.py 设置12345678910# -*- coding: utf-8 -*-# Scrapy settings for Qiji_Project project## For simplicity, this file contains only settings considered important or# commonly used. You">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/23/scrapy-redis使用手册/"/>
+
+
+
+
+
+  <title> | Jon</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jon</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">啊园</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/scrapy-redis使用手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T17:04:47+08:00">
+                2017-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="scrap-redis使用手册"><a href="#scrap-redis使用手册" class="headerlink" title="scrap-redis使用手册"></a>scrap-redis使用手册</h1><h2 id="settings-py-设置"><a href="#settings-py-设置" class="headerlink" title="settings.py 设置"></a>settings.py 设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line"># Scrapy settings for Qiji_Project project</span><br><span class="line">#</span><br><span class="line"># For simplicity, this file contains only settings considered important or</span><br><span class="line"># commonly used. You can find more settings consulting the documentation:</span><br><span class="line">#</span><br><span class="line">#     http://doc.scrapy.org/en/latest/topics/settings.html</span><br><span class="line">#     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html</span><br><span class="line">#     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html</span><br></pre></td></tr></table></figure>
+<h3 id="项目名称"><a href="#项目名称" class="headerlink" title="项目名称"></a>项目名称</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">BOT_NAME = &apos;Qiji_Project&apos;</span><br><span class="line"></span><br><span class="line">SPIDER_MODULES = [&apos;Qiji_Project.spiders&apos;]</span><br><span class="line">NEWSPIDER_MODULE = &apos;Qiji_Project.spiders&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span><br><span class="line">#USER_AGENT = &apos;Qiji_Project (+http://www.yourdomain.com)&apos;</span><br><span class="line"></span><br><span class="line"># Obey robots.txt rules 不遵守爬虫协议</span><br><span class="line"></span><br><span class="line">ROBOTSTXT_OBEY = False</span><br></pre></td></tr></table></figure>
+<h3 id="并发设置默认16-Configure-maximum-concurrent-requests-performed-by-Scrapy-default-16"><a href="#并发设置默认16-Configure-maximum-concurrent-requests-performed-by-Scrapy-default-16" class="headerlink" title="并发设置默认16 Configure maximum concurrent requests performed by Scrapy (default: 16)"></a>并发设置默认16 Configure maximum concurrent requests performed by Scrapy (default: 16)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CONCURRENT_REQUESTS = 32</span><br><span class="line"></span><br><span class="line"># Configure a delay for requests for the same website (default: 0)</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay</span><br></pre></td></tr></table></figure>
+<h4 id="下载间隔时间设置-See-also-autothrottle-settings-and-docs"><a href="#下载间隔时间设置-See-also-autothrottle-settings-and-docs" class="headerlink" title="下载间隔时间设置 See also autothrottle settings and docs"></a>下载间隔时间设置 See also autothrottle settings and docs</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOAD_DELAY = 0.5</span><br><span class="line"># The download delay setting will honor only one of:</span><br><span class="line">#CONCURRENT_REQUESTS_PER_DOMAIN = 16</span><br><span class="line">#CONCURRENT_REQUESTS_PER_IP = 16</span><br></pre></td></tr></table></figure>
+<h2 id="禁止使用cookies-Disable-cookies-enabled-by-default"><a href="#禁止使用cookies-Disable-cookies-enabled-by-default" class="headerlink" title="禁止使用cookies Disable cookies (enabled by default)"></a>禁止使用cookies Disable cookies (enabled by default)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#COOKIES_ENABLED = False</span><br><span class="line"></span><br><span class="line">#  Disable Telnet Console (enabled by default)</span><br><span class="line">#TELNETCONSOLE_ENABLED = False</span><br></pre></td></tr></table></figure>
+<h2 id="设置Headers-Override-the-default-request-headers"><a href="#设置Headers-Override-the-default-request-headers" class="headerlink" title="设置Headers Override the default request headers:"></a>设置Headers Override the default request headers:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_REQUEST_HEADERS = &#123;</span><br><span class="line">    &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&apos;,</span><br><span class="line">    &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.9 Safari/537.36&apos;,</span><br><span class="line">    &apos;Cookie&apos;:&apos;DJ_RF=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DLdxs2ekDgnCDsXgB0L72LBmMD9fW8WUkcdJyRaPe6RC%26wd%3D%26eqid%3Da72873e90004762d000000035a13887d; DJ_EU=http%3A%2F%2Fwww.dajie.com%2F; DJ_UVID=MTUxMTIyOTU2OTQ4OTM0MDM3; dj_cap=90c35250b8beb11cdba19576492562a3; DJ_DNS_PREFETECH=1; dj_nav=1; SO_COOKIE_V2=b968jCm+qrn4+bo0NdCEz90eQTn7Mwun9aZSG9n5PYsQjajj8JWALS+tQta6BHZGUIwFB6ksg6ibYt02UR52GnkFFVxy68xV1amn; dj_auth_v3=MTHt7vw9VBtjWkTqjz0ArD2qgRvAZUQs1qqAhcAzIYh45mL9ndGqCwKt4vRTMr8*; dj_auth_v4=81b5b77c2d3b7b84c586542655fde9a5_pc; uchome_loginuser=38870823; _check_isqd=no; USER_ACTION=request^AProfessional^AAUTO^A-^A-&apos;,</span><br><span class="line">    &apos;Accept-Language&apos;: &apos;en&apos;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Enable or disable spider middlewares</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html</span><br></pre></td></tr></table></figure>
+<h2 id="spider中间件"><a href="#spider中间件" class="headerlink" title="spider中间件"></a>spider中间件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#SPIDER_MIDDLEWARES = &#123;</span><br><span class="line">#    &apos;Qiji_Project.middlewares.QijiProjectSpiderMiddleware&apos;: 543,</span><br><span class="line">#&#125;</span><br><span class="line"></span><br><span class="line"># Enable or disable downloader middlewares</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html</span><br></pre></td></tr></table></figure>
+<h2 id="下载中间件"><a href="#下载中间件" class="headerlink" title="下载中间件"></a>下载中间件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   # &apos;Qiji_Project.middlewares.MyCustomDownloaderMiddleware&apos;: 543,</span><br><span class="line">    &apos;scrapy.downloadermiddlewares.useragent.UserAgentMiddleware&apos;:None,</span><br><span class="line">    #User-Agent</span><br><span class="line">    &apos;Qiji_Project.mymiddlewares.RandomUserAgent&apos;:1,</span><br><span class="line">    #免费代理的使用</span><br><span class="line">    # &apos;Qiji_Project.mymiddlewares.FreeRandomProxy&apos;: 2,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Enable or disable extensions</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/extensions.html</span><br><span class="line">#EXTENSIONS = &#123;</span><br><span class="line">#    &apos;scrapy.extensions.telnet.TelnetConsole&apos;: None,</span><br><span class="line">#&#125;</span><br><span class="line"></span><br><span class="line"># Configure item pipelines</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html</span><br></pre></td></tr></table></figure>
+<h2 id="管道文件"><a href="#管道文件" class="headerlink" title="管道文件"></a>管道文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">   # &apos;Qiji_Project.pipelines.QijiProjectPipeline&apos;: 300,</span><br><span class="line">   #  &apos;scrapy_redis.pipelines.RedisPipeline&apos;:999,</span><br><span class="line">    # 配置redis管道文件，权重数字相对最大</span><br><span class="line">    &apos;scrapy_redis.pipelines.RedisPipeline&apos;: 999, # redis管道文件，自动把数据加载到redis</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Enable and configure the AutoThrottle extension (disabled by default)</span><br><span class="line"># See http://doc.scrapy.org/en/latest/topics/autothrottle.html</span><br><span class="line">#AUTOTHROTTLE_ENABLED = True</span><br><span class="line"># The initial download delay</span><br><span class="line">#AUTOTHROTTLE_START_DELAY = 5</span><br><span class="line"># The maximum download delay to be set in case of high latencies</span><br><span class="line">#AUTOTHROTTLE_MAX_DELAY = 60</span><br><span class="line"># The average number of requests Scrapy should be sending in parallel to</span><br><span class="line"># each remote server</span><br><span class="line">#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0</span><br><span class="line"># Enable showing throttling stats for every response received:</span><br><span class="line">#AUTOTHROTTLE_DEBUG = False</span><br><span class="line"></span><br><span class="line"># Enable and configure HTTP caching (disabled by default)</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings</span><br><span class="line">#HTTPCACHE_ENABLED = True</span><br><span class="line">#HTTPCACHE_EXPIRATION_SECS = 0</span><br><span class="line">#HTTPCACHE_DIR = &apos;httpcache&apos;</span><br><span class="line">#HTTPCACHE_IGNORE_HTTP_CODES = []</span><br><span class="line">#HTTPCACHE_STORAGE = &apos;scrapy.extensions.httpcache.FilesystemCacheStorage&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="分布式爬取"><a href="#分布式爬取" class="headerlink" title="分布式爬取"></a>分布式爬取</h2><h3 id="下载超时-下载的时间超过3s就丢弃"><a href="#下载超时-下载的时间超过3s就丢弃" class="headerlink" title="下载超时 下载的时间超过3s就丢弃"></a>下载超时 下载的时间超过3s就丢弃</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># DOWNLOAD_TIMEOUT = 3</span><br></pre></td></tr></table></figure>
+<h2 id="url-指纹-过滤器-使用scrapy-redis的去重组件-不使用scapy的默认去重"><a href="#url-指纹-过滤器-使用scrapy-redis的去重组件-不使用scapy的默认去重" class="headerlink" title="url 指纹 过滤器,使用scrapy-redis的去重组件,不使用scapy的默认去重."></a>url 指纹 过滤器,使用scrapy-redis的去重组件,不使用scapy的默认去重.</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DUPEFILTER_CLASS = &quot;scrapy_redis.dupefilter.RFPDupeFilter&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="使用scrapy-redis调度器"><a href="#使用scrapy-redis调度器" class="headerlink" title="使用scrapy-redis调度器"></a>使用scrapy-redis调度器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCHEDULER = &quot;scrapy_redis.scheduler.Scheduler&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="允许暂停redis请求记录不丢失-设置爬虫是否可以中断"><a href="#允许暂停redis请求记录不丢失-设置爬虫是否可以中断" class="headerlink" title="允许暂停redis请求记录不丢失 设置爬虫是否可以中断"></a>允许暂停redis请求记录不丢失 设置爬虫是否可以中断</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCHEDULER_PERSIST = True</span><br></pre></td></tr></table></figure>
+<h2 id="默认的scrapy-redis请求-按优先级顺序-队列形式"><a href="#默认的scrapy-redis请求-按优先级顺序-队列形式" class="headerlink" title="默认的scrapy-redis请求 (按优先级顺序)队列形式"></a>默认的scrapy-redis请求 (按优先级顺序)队列形式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCHEDULER_QUEUE_CLASS = &quot;scrapy_redis.queue.SpiderPriorityQueue&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="队列形式-先进的先出"><a href="#队列形式-先进的先出" class="headerlink" title="队列形式 先进的先出"></a>队列形式 先进的先出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># SCHEDULER_QUEUE_CLASS = &quot;scrapy_redis.queue.SpiderQueue&quot;  # 按照队列模式</span><br></pre></td></tr></table></figure>
+<h2 id="栈形式-请求先进后出"><a href="#栈形式-请求先进后出" class="headerlink" title="栈形式,请求先进后出"></a>栈形式,请求先进后出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># SCHEDULER_QUEUE_CLASS = &quot;scrapy_redis.queue.SpiderStack&quot; # 按照栈进行请求的调度</span><br></pre></td></tr></table></figure>
+<h2 id="redis-连接配置-主机"><a href="#redis-连接配置-主机" class="headerlink" title="redis 连接配置 主机"></a>redis 连接配置 主机</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REDIS_HOST = &apos;106.14.159.206&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REDIS_PORT = 6000</span><br></pre></td></tr></table></figure>
+<h2 id="免费代理的使用-没有从数据库中获取"><a href="#免费代理的使用-没有从数据库中获取" class="headerlink" title="免费代理的使用(没有从数据库中获取)"></a>免费代理的使用(没有从数据库中获取)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># PROXIES = [</span><br><span class="line">#     &#123;&apos;host&apos; : &apos;114.227.97.50:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos; : &apos;115.148.27.10:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;117.139.45.248:8123&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;117.90.0.155:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;120.27.10.38:8090&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;121.232.147.38:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;121.232.148.150:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;223.151.209.189:9000&apos;&#125;,</span><br><span class="line"></span><br><span class="line"># ]</span><br></pre></td></tr></table></figure>
+<h2 id="付费代理的使用"><a href="#付费代理的使用" class="headerlink" title="付费代理的使用"></a>付费代理的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># AUTH_PROXIES = [</span><br><span class="line">#     &#123;&apos;host&apos; : &apos;120.78.166.84:6666&apos;, &apos;auth&apos; : &apos;alice:123456&apos;&#125;</span><br><span class="line"># ]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/23/spiders配置/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jon</p>
+              <p class="site-description motion-element" itemprop="description">You are the meaning of my life</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#scrap-redis使用手册"><span class="nav-text">scrap-redis使用手册</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#settings-py-设置"><span class="nav-text">settings.py 设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目名称"><span class="nav-text">项目名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发设置默认16-Configure-maximum-concurrent-requests-performed-by-Scrapy-default-16"><span class="nav-text">并发设置默认16 Configure maximum concurrent requests performed by Scrapy (default: 16)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载间隔时间设置-See-also-autothrottle-settings-and-docs"><span class="nav-text">下载间隔时间设置 See also autothrottle settings and docs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#禁止使用cookies-Disable-cookies-enabled-by-default"><span class="nav-text">禁止使用cookies Disable cookies (enabled by default)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置Headers-Override-the-default-request-headers"><span class="nav-text">设置Headers Override the default request headers:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spider中间件"><span class="nav-text">spider中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载中间件"><span class="nav-text">下载中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道文件"><span class="nav-text">管道文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式爬取"><span class="nav-text">分布式爬取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载超时-下载的时间超过3s就丢弃"><span class="nav-text">下载超时 下载的时间超过3s就丢弃</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url-指纹-过滤器-使用scrapy-redis的去重组件-不使用scapy的默认去重"><span class="nav-text">url 指纹 过滤器,使用scrapy-redis的去重组件,不使用scapy的默认去重.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用scrapy-redis调度器"><span class="nav-text">使用scrapy-redis调度器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#允许暂停redis请求记录不丢失-设置爬虫是否可以中断"><span class="nav-text">允许暂停redis请求记录不丢失 设置爬虫是否可以中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认的scrapy-redis请求-按优先级顺序-队列形式"><span class="nav-text">默认的scrapy-redis请求 (按优先级顺序)队列形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列形式-先进的先出"><span class="nav-text">队列形式 先进的先出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈形式-请求先进后出"><span class="nav-text">栈形式,请求先进后出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-连接配置-主机"><span class="nav-text">redis 连接配置 主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-text">端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#免费代理的使用-没有从数据库中获取"><span class="nav-text">免费代理的使用(没有从数据库中获取)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#付费代理的使用"><span class="nav-text">付费代理的使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1041,6 +1041,266 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/spiders配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/23/spiders配置/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T21:56:22+08:00">
+                2017-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="scrapy配置"><a href="#scrapy配置" class="headerlink" title="scrapy配置"></a>scrapy配置</h1><p>===============<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import scrapy</span><br><span class="line">from scrapy.linkextractors import LinkExtractor</span><br><span class="line">from scrapy.spiders import CrawlSpider, Rule</span><br><span class="line">import re</span><br><span class="line">import datetime</span><br><span class="line">from datetime import timedelta</span><br><span class="line"># from Qiji_Project.items import DhinahrItem</span><br><span class="line"></span><br><span class="line">from scrapy_redis.spiders import RedisCrawlSpider#爬虫集成</span><br></pre></td></tr></table></figure></p>
+<p> 给redis加一个key 启动爬虫<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpush chinahrspider:start_urls http://www.chinahr.com/</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line">class ChinahrSpider(RedisCrawlSpider):</span><br><span class="line">    name = &apos;chinahr&apos;</span><br><span class="line"></span><br><span class="line">    allowed_domains = [&apos;chinahr.com&apos;]</span><br><span class="line">    </span><br><span class="line">    # start_urls = [&apos;http://www.chinahr.com/&apos;]</span><br><span class="line"></span><br><span class="line">    # 启动所有slaver端的爬虫指令,参考格式,建议采用这种格式    </span><br><span class="line">    </span><br><span class="line">    redis_key = &apos;chinahrspider:start_urls&apos;</span><br><span class="line">    #匹配路径</span><br><span class="line">    rules = (</span><br><span class="line">        Rule(LinkExtractor(allow=r&apos;.chinahr.com/job/\d+.html&apos;), callback=&apos;parse_item&apos;, follow=False),</span><br><span class="line">        Rule(LinkExtractor(allow=r&apos;.chinahr.com/job/\d+.html?searchplace=&apos;), callback=&apos;parse_item&apos;, follow=False),</span><br><span class="line">        Rule(LinkExtractor(allow=r&apos;.chinahr.com/sou/&apos;), follow=True),</span><br><span class="line">        Rule(LinkExtractor(allow=r&apos;.chinahr.com/.*/jobs/\d+/&apos;), follow=True),</span><br><span class="line">    )</span><br><span class="line">    num_pattern = re.compile(r&apos;\d+&apos;)</span><br><span class="line"></span><br><span class="line">    # 页面解析函数</span><br><span class="line"></span><br><span class="line">    def parse_item(self, response):</span><br><span class="line">        # item = DhinahrItem()</span><br><span class="line">        item = &#123;&#125;</span><br><span class="line">        # 链接</span><br><span class="line">        url = response.url</span><br><span class="line">        # print(url)</span><br><span class="line">        # 职位名称</span><br><span class="line">        pname = response.xpath(&apos;//div[@class=&quot;base_info&quot;]//span[@class=&quot;job_name&quot;]/text()&apos;).extract()</span><br><span class="line">        if pname:</span><br><span class="line">            pname = pname[0]</span><br><span class="line">        else:</span><br><span class="line">           pname = None</span><br><span class="line">        # 工资</span><br><span class="line">        money = response.xpath(&apos;//span[@class=&quot;job_price&quot;]/text()&apos;).extract()</span><br><span class="line">        if money:</span><br><span class="line">            money = money[0]</span><br><span class="line">            smoney,emoney = self.process_money(money)</span><br><span class="line">        else:</span><br><span class="line">            smoney,emoney = None,None</span><br><span class="line">        # 工作城市</span><br><span class="line">        location = response.xpath(&apos;//div[@class=&quot;job_require&quot;]//span[@class=&quot;job_loc&quot;]/text()&apos;).extract()</span><br><span class="line">        if location:</span><br><span class="line">            location = location[0]</span><br><span class="line">        else:</span><br><span class="line">            location = None</span><br><span class="line">        # 工作经历</span><br><span class="line">        year = response.xpath(&apos;//div[@class=&quot;job_require&quot;]//span[@class=&quot;job_exp&quot;]/text()&apos;).extract()</span><br><span class="line">        if year:</span><br><span class="line">            year = year[0]</span><br><span class="line">            syear, eyear = self.process_year(year)</span><br><span class="line">        else:</span><br><span class="line">            syear, eyear = None,None</span><br><span class="line">        # 学历</span><br><span class="line">        degree = response.xpath(&apos;//div[@class=&quot;job_require&quot;]//span[4]/text()&apos;).extract()</span><br><span class="line">        if degree:</span><br><span class="line">            degree = degree[0]</span><br><span class="line">        else:</span><br><span class="line">            degree = None</span><br><span class="line">        # 工作类型</span><br><span class="line">        ptype = response.xpath(&apos;//div[@class=&quot;job_require&quot;]//span[3]/text()&apos;).extract()</span><br><span class="line">        if ptype:</span><br><span class="line">            ptype = ptype[0]</span><br><span class="line">        else:</span><br><span class="line">            ptype = None</span><br><span class="line"></span><br><span class="line">        tags = None</span><br><span class="line">        # 发布时间</span><br><span class="line">        date_pub = response.xpath(&apos;//p[@class=&quot;updatetime&quot;]/text()&apos;).extract()</span><br><span class="line">        if date_pub:</span><br><span class="line">            date_pub = date_pub[0]</span><br><span class="line">            date_pub = self.process_date(date_pub)</span><br><span class="line">        else:</span><br><span class="line">           date_pub = None</span><br><span class="line">        # 福利</span><br><span class="line">        advantage = response.xpath(&apos;//ul[@class=&quot;clear&quot;]//li/text()&apos;).extract()</span><br><span class="line">        if advantage:</span><br><span class="line">            advantage = advantage[0]</span><br><span class="line">        else:</span><br><span class="line">            advantage = None</span><br><span class="line">        # 工作描述</span><br><span class="line">        jobdesc = response.xpath(&apos;//div[@class=&quot;job_intro_info&quot;]/text()&apos;).extract()</span><br><span class="line">        if jobdesc:</span><br><span class="line">            jobdesc = self.process_desc(jobdesc)</span><br><span class="line">        else:</span><br><span class="line">            jobdesc = None</span><br><span class="line">        # 工作地点</span><br><span class="line">        jobaddr = response.xpath(&apos;//div[@class=&quot;job_require&quot;]//span[@class=&quot;job_loc&quot;]/text()&apos;).extract()</span><br><span class="line">        if jobaddr:</span><br><span class="line">            jobaddr = jobaddr[0]</span><br><span class="line">        else:</span><br><span class="line">            jobaddr = None</span><br><span class="line">        # 公司名称</span><br><span class="line">        company = response.xpath(&apos;//div[@class=&quot;job-detail-r&quot;]//h4/a/text()&apos;).extract()</span><br><span class="line">        if company:</span><br><span class="line">            company = company[0]</span><br><span class="line">        else:</span><br><span class="line">            company = None</span><br><span class="line">        # 抓取时间</span><br><span class="line">        crawl_time = datetime.datetime.now().strftime(&apos;%Y-%m-%d&apos;)</span><br><span class="line"></span><br><span class="line">        # print(url,pname,smoney,emoney,eyear,syear,degree,ptype,tags,date_pub,advantage,jobdesc,jobaddr,company,crawl_time)</span><br><span class="line">        item[&quot;url&quot;] = url</span><br><span class="line">        item[&quot;pname&quot;] = pname</span><br><span class="line">        item[&quot;smoney&quot;] = smoney</span><br><span class="line">        item[&quot;emoney&quot;] = emoney</span><br><span class="line">        item[&quot;location&quot;] = location</span><br><span class="line">        item[&quot;syear&quot;] = syear</span><br><span class="line">        item[&quot;eyear&quot;] = eyear</span><br><span class="line">        item[&quot;degree&quot;] = degree</span><br><span class="line">        item[&quot;ptype&quot;] = ptype</span><br><span class="line">        item[&quot;tags&quot;] = tags</span><br><span class="line">        item[&quot;date_pub&quot;] = date_pub</span><br><span class="line">        item[&quot;advantage&quot;] = advantage</span><br><span class="line">        item[&quot;jobdesc&quot;] = jobdesc</span><br><span class="line">        item[&quot;jobaddr&quot;] = jobaddr</span><br><span class="line">        item[&quot;company&quot;] = company</span><br><span class="line">        item[&quot;crawl_time&quot;] = crawl_time</span><br><span class="line">        # if item[&apos;pname&apos;] != None:</span><br><span class="line">        yield item</span><br><span class="line"></span><br><span class="line">    # 发布时间处理</span><br><span class="line">    def process_date(self,value):</span><br><span class="line">        if &apos;今天&apos; in value:</span><br><span class="line">            date_pub = datetime.datetime.now().strftime(&apos;%Y-%m-%d&apos;)</span><br><span class="line">        elif &apos;昨天&apos; in value:</span><br><span class="line">            date_pub = (datetime.datetime.now() - timedelta(days=int(24))).strftime(&apos;%Y-%m-%d&apos;)</span><br><span class="line">        else:</span><br><span class="line">            res = self.num_pattern.search(value).group()</span><br><span class="line">            date_pub = (datetime.datetime.now() - timedelta(days=int(res))).strftime(&apos;%Y-%m-%d&apos;)</span><br><span class="line">        return date_pub</span><br><span class="line">    # 工作经历处理</span><br><span class="line">    def process_year(self,value):</span><br><span class="line">        if &apos;应届&apos; in value:</span><br><span class="line">            syear = 0</span><br><span class="line">            eyear = 0</span><br><span class="line">        else:</span><br><span class="line">            res = self.num_pattern.search(value)</span><br><span class="line">            if res is None:</span><br><span class="line">                syear = None</span><br><span class="line">                eyear = None</span><br><span class="line">            else:</span><br><span class="line">                syear = res.group()</span><br><span class="line">                eyear = res.group()</span><br><span class="line">        return syear,eyear</span><br><span class="line">    # 工资处理</span><br><span class="line">    def process_money(self,value):</span><br><span class="line">        if &quot;面&quot; not in value:</span><br><span class="line">            smoney = value.split(&apos;-&apos;)[0]</span><br><span class="line">            emoney = value.split(&apos;-&apos;)[1]</span><br><span class="line">        else:</span><br><span class="line">            smoney = 0</span><br><span class="line">            emoney = 0</span><br><span class="line">        return smoney,emoney</span><br><span class="line">    # 工作详情处理</span><br><span class="line">    def process_desc(self,value):</span><br><span class="line">        jobdesc = &apos;&apos;.join(value).replace(&apos;\r\n&apos;,&apos;&apos;).strip()</span><br><span class="line">        return jobdesc</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/scrapy-redis使用手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/23/scrapy-redis使用手册/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T17:04:47+08:00">
+                2017-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="scrap-redis使用手册"><a href="#scrap-redis使用手册" class="headerlink" title="scrap-redis使用手册"></a>scrap-redis使用手册</h1><h2 id="settings-py-设置"><a href="#settings-py-设置" class="headerlink" title="settings.py 设置"></a>settings.py 设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line"># Scrapy settings for Qiji_Project project</span><br><span class="line">#</span><br><span class="line"># For simplicity, this file contains only settings considered important or</span><br><span class="line"># commonly used. You can find more settings consulting the documentation:</span><br><span class="line">#</span><br><span class="line">#     http://doc.scrapy.org/en/latest/topics/settings.html</span><br><span class="line">#     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html</span><br><span class="line">#     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html</span><br></pre></td></tr></table></figure>
+<h3 id="项目名称"><a href="#项目名称" class="headerlink" title="项目名称"></a>项目名称</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">BOT_NAME = &apos;Qiji_Project&apos;</span><br><span class="line"></span><br><span class="line">SPIDER_MODULES = [&apos;Qiji_Project.spiders&apos;]</span><br><span class="line">NEWSPIDER_MODULE = &apos;Qiji_Project.spiders&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span><br><span class="line">#USER_AGENT = &apos;Qiji_Project (+http://www.yourdomain.com)&apos;</span><br><span class="line"></span><br><span class="line"># Obey robots.txt rules 不遵守爬虫协议</span><br><span class="line"></span><br><span class="line">ROBOTSTXT_OBEY = False</span><br></pre></td></tr></table></figure>
+<h3 id="并发设置默认16-Configure-maximum-concurrent-requests-performed-by-Scrapy-default-16"><a href="#并发设置默认16-Configure-maximum-concurrent-requests-performed-by-Scrapy-default-16" class="headerlink" title="并发设置默认16 Configure maximum concurrent requests performed by Scrapy (default: 16)"></a>并发设置默认16 Configure maximum concurrent requests performed by Scrapy (default: 16)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CONCURRENT_REQUESTS = 32</span><br><span class="line"></span><br><span class="line"># Configure a delay for requests for the same website (default: 0)</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay</span><br></pre></td></tr></table></figure>
+<h4 id="下载间隔时间设置-See-also-autothrottle-settings-and-docs"><a href="#下载间隔时间设置-See-also-autothrottle-settings-and-docs" class="headerlink" title="下载间隔时间设置 See also autothrottle settings and docs"></a>下载间隔时间设置 See also autothrottle settings and docs</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOAD_DELAY = 0.5</span><br><span class="line"># The download delay setting will honor only one of:</span><br><span class="line">#CONCURRENT_REQUESTS_PER_DOMAIN = 16</span><br><span class="line">#CONCURRENT_REQUESTS_PER_IP = 16</span><br></pre></td></tr></table></figure>
+<h2 id="禁止使用cookies-Disable-cookies-enabled-by-default"><a href="#禁止使用cookies-Disable-cookies-enabled-by-default" class="headerlink" title="禁止使用cookies Disable cookies (enabled by default)"></a>禁止使用cookies Disable cookies (enabled by default)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#COOKIES_ENABLED = False</span><br><span class="line"></span><br><span class="line">#  Disable Telnet Console (enabled by default)</span><br><span class="line">#TELNETCONSOLE_ENABLED = False</span><br></pre></td></tr></table></figure>
+<h2 id="设置Headers-Override-the-default-request-headers"><a href="#设置Headers-Override-the-default-request-headers" class="headerlink" title="设置Headers Override the default request headers:"></a>设置Headers Override the default request headers:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_REQUEST_HEADERS = &#123;</span><br><span class="line">    &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&apos;,</span><br><span class="line">    &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.9 Safari/537.36&apos;,</span><br><span class="line">    &apos;Cookie&apos;:&apos;DJ_RF=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DLdxs2ekDgnCDsXgB0L72LBmMD9fW8WUkcdJyRaPe6RC%26wd%3D%26eqid%3Da72873e90004762d000000035a13887d; DJ_EU=http%3A%2F%2Fwww.dajie.com%2F; DJ_UVID=MTUxMTIyOTU2OTQ4OTM0MDM3; dj_cap=90c35250b8beb11cdba19576492562a3; DJ_DNS_PREFETECH=1; dj_nav=1; SO_COOKIE_V2=b968jCm+qrn4+bo0NdCEz90eQTn7Mwun9aZSG9n5PYsQjajj8JWALS+tQta6BHZGUIwFB6ksg6ibYt02UR52GnkFFVxy68xV1amn; dj_auth_v3=MTHt7vw9VBtjWkTqjz0ArD2qgRvAZUQs1qqAhcAzIYh45mL9ndGqCwKt4vRTMr8*; dj_auth_v4=81b5b77c2d3b7b84c586542655fde9a5_pc; uchome_loginuser=38870823; _check_isqd=no; USER_ACTION=request^AProfessional^AAUTO^A-^A-&apos;,</span><br><span class="line">    &apos;Accept-Language&apos;: &apos;en&apos;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Enable or disable spider middlewares</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html</span><br></pre></td></tr></table></figure>
+<h2 id="spider中间件"><a href="#spider中间件" class="headerlink" title="spider中间件"></a>spider中间件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#SPIDER_MIDDLEWARES = &#123;</span><br><span class="line">#    &apos;Qiji_Project.middlewares.QijiProjectSpiderMiddleware&apos;: 543,</span><br><span class="line">#&#125;</span><br><span class="line"></span><br><span class="line"># Enable or disable downloader middlewares</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html</span><br></pre></td></tr></table></figure>
+<h2 id="下载中间件"><a href="#下载中间件" class="headerlink" title="下载中间件"></a>下载中间件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   # &apos;Qiji_Project.middlewares.MyCustomDownloaderMiddleware&apos;: 543,</span><br><span class="line">    &apos;scrapy.downloadermiddlewares.useragent.UserAgentMiddleware&apos;:None,</span><br><span class="line">    #User-Agent</span><br><span class="line">    &apos;Qiji_Project.mymiddlewares.RandomUserAgent&apos;:1,</span><br><span class="line">    #免费代理的使用</span><br><span class="line">    # &apos;Qiji_Project.mymiddlewares.FreeRandomProxy&apos;: 2,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Enable or disable extensions</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/extensions.html</span><br><span class="line">#EXTENSIONS = &#123;</span><br><span class="line">#    &apos;scrapy.extensions.telnet.TelnetConsole&apos;: None,</span><br><span class="line">#&#125;</span><br><span class="line"></span><br><span class="line"># Configure item pipelines</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html</span><br></pre></td></tr></table></figure>
+<h2 id="管道文件"><a href="#管道文件" class="headerlink" title="管道文件"></a>管道文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">   # &apos;Qiji_Project.pipelines.QijiProjectPipeline&apos;: 300,</span><br><span class="line">   #  &apos;scrapy_redis.pipelines.RedisPipeline&apos;:999,</span><br><span class="line">    # 配置redis管道文件，权重数字相对最大</span><br><span class="line">    &apos;scrapy_redis.pipelines.RedisPipeline&apos;: 999, # redis管道文件，自动把数据加载到redis</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Enable and configure the AutoThrottle extension (disabled by default)</span><br><span class="line"># See http://doc.scrapy.org/en/latest/topics/autothrottle.html</span><br><span class="line">#AUTOTHROTTLE_ENABLED = True</span><br><span class="line"># The initial download delay</span><br><span class="line">#AUTOTHROTTLE_START_DELAY = 5</span><br><span class="line"># The maximum download delay to be set in case of high latencies</span><br><span class="line">#AUTOTHROTTLE_MAX_DELAY = 60</span><br><span class="line"># The average number of requests Scrapy should be sending in parallel to</span><br><span class="line"># each remote server</span><br><span class="line">#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0</span><br><span class="line"># Enable showing throttling stats for every response received:</span><br><span class="line">#AUTOTHROTTLE_DEBUG = False</span><br><span class="line"></span><br><span class="line"># Enable and configure HTTP caching (disabled by default)</span><br><span class="line"># See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings</span><br><span class="line">#HTTPCACHE_ENABLED = True</span><br><span class="line">#HTTPCACHE_EXPIRATION_SECS = 0</span><br><span class="line">#HTTPCACHE_DIR = &apos;httpcache&apos;</span><br><span class="line">#HTTPCACHE_IGNORE_HTTP_CODES = []</span><br><span class="line">#HTTPCACHE_STORAGE = &apos;scrapy.extensions.httpcache.FilesystemCacheStorage&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="分布式爬取"><a href="#分布式爬取" class="headerlink" title="分布式爬取"></a>分布式爬取</h2><h3 id="下载超时-下载的时间超过3s就丢弃"><a href="#下载超时-下载的时间超过3s就丢弃" class="headerlink" title="下载超时 下载的时间超过3s就丢弃"></a>下载超时 下载的时间超过3s就丢弃</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># DOWNLOAD_TIMEOUT = 3</span><br></pre></td></tr></table></figure>
+<h2 id="url-指纹-过滤器-使用scrapy-redis的去重组件-不使用scapy的默认去重"><a href="#url-指纹-过滤器-使用scrapy-redis的去重组件-不使用scapy的默认去重" class="headerlink" title="url 指纹 过滤器,使用scrapy-redis的去重组件,不使用scapy的默认去重."></a>url 指纹 过滤器,使用scrapy-redis的去重组件,不使用scapy的默认去重.</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DUPEFILTER_CLASS = &quot;scrapy_redis.dupefilter.RFPDupeFilter&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="使用scrapy-redis调度器"><a href="#使用scrapy-redis调度器" class="headerlink" title="使用scrapy-redis调度器"></a>使用scrapy-redis调度器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCHEDULER = &quot;scrapy_redis.scheduler.Scheduler&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="允许暂停redis请求记录不丢失-设置爬虫是否可以中断"><a href="#允许暂停redis请求记录不丢失-设置爬虫是否可以中断" class="headerlink" title="允许暂停redis请求记录不丢失 设置爬虫是否可以中断"></a>允许暂停redis请求记录不丢失 设置爬虫是否可以中断</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCHEDULER_PERSIST = True</span><br></pre></td></tr></table></figure>
+<h2 id="默认的scrapy-redis请求-按优先级顺序-队列形式"><a href="#默认的scrapy-redis请求-按优先级顺序-队列形式" class="headerlink" title="默认的scrapy-redis请求 (按优先级顺序)队列形式"></a>默认的scrapy-redis请求 (按优先级顺序)队列形式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCHEDULER_QUEUE_CLASS = &quot;scrapy_redis.queue.SpiderPriorityQueue&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="队列形式-先进的先出"><a href="#队列形式-先进的先出" class="headerlink" title="队列形式 先进的先出"></a>队列形式 先进的先出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># SCHEDULER_QUEUE_CLASS = &quot;scrapy_redis.queue.SpiderQueue&quot;  # 按照队列模式</span><br></pre></td></tr></table></figure>
+<h2 id="栈形式-请求先进后出"><a href="#栈形式-请求先进后出" class="headerlink" title="栈形式,请求先进后出"></a>栈形式,请求先进后出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># SCHEDULER_QUEUE_CLASS = &quot;scrapy_redis.queue.SpiderStack&quot; # 按照栈进行请求的调度</span><br></pre></td></tr></table></figure>
+<h2 id="redis-连接配置-主机"><a href="#redis-连接配置-主机" class="headerlink" title="redis 连接配置 主机"></a>redis 连接配置 主机</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REDIS_HOST = &apos;106.14.159.206&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REDIS_PORT = 6000</span><br></pre></td></tr></table></figure>
+<h2 id="免费代理的使用-没有从数据库中获取"><a href="#免费代理的使用-没有从数据库中获取" class="headerlink" title="免费代理的使用(没有从数据库中获取)"></a>免费代理的使用(没有从数据库中获取)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># PROXIES = [</span><br><span class="line">#     &#123;&apos;host&apos; : &apos;114.227.97.50:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos; : &apos;115.148.27.10:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;117.139.45.248:8123&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;117.90.0.155:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;120.27.10.38:8090&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;121.232.147.38:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;121.232.148.150:9000&apos;&#125;,</span><br><span class="line">#     &#123;&apos;host&apos;: &apos;223.151.209.189:9000&apos;&#125;,</span><br><span class="line"></span><br><span class="line"># ]</span><br></pre></td></tr></table></figure>
+<h2 id="付费代理的使用"><a href="#付费代理的使用" class="headerlink" title="付费代理的使用"></a>付费代理的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># AUTH_PROXIES = [</span><br><span class="line">#     &#123;&apos;host&apos; : &apos;120.78.166.84:6666&apos;, &apos;auth&apos; : &apos;alice:123456&apos;&#125;</span><br><span class="line"># ]</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1087,7 +1347,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
